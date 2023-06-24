@@ -1,8 +1,8 @@
-# uvicorn yes-no-server:app --port 8999 --host 0.0.0.0
+# uvicorn sentiment-server:app --port 9003 --host 0.0.0.0
 
 from transformers import pipeline
-from fastapi import FastAPI
 from typing import Union
+from fastapi import FastAPI
 
 task = "zero-shot-classification"
 model = "facebook/bart-large-mnli"
@@ -16,10 +16,13 @@ app = FastAPI()
 
 @app.get('/')
 def get_root():
-    return {'message': 'Yes-No-Server'}
+    return {'message': 'Sentiment-Server'}
 
-@app.get("/yes-or-no-classifier")
-def read_item(text: Union[str, None] = None):
+@app.get('/yes_or_no/')
+async def query_yes_no_analysis(text: str):
+    return analyze_yes_no(text)
+
+def analyze_yes_no(text):
 	global labels
 	return {"result": classifier(text, labels)}
 
@@ -48,4 +51,3 @@ def analyze_sentiment(text):
 
     # Format and return results
     return {'sentiment': sent, 'probability': prob}
-

@@ -14,7 +14,7 @@ app = FastAPI()
 
 @app.get('/')
 def get_root():
-    return {'message': 'Sentiment-Server'}
+    return {'message': 'Yes-No-Server'}
 
 @app.get('/yes_or_no/')
 async def query_yes_no_analysis(text: str):

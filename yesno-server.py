@@ -1,4 +1,4 @@
-# uvicorn sentiment-server:app --port 9003 --host 0.0.0.0
+# uvicorn yesno-server:app --port 9003 --host 0.0.0.0
 
 from transformers import pipeline
 from typing import Union
